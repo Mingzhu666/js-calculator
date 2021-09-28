@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: -webkit-gradient(linear, left top, right top, from(#99dbde), to(#2b79a6));
+  background: linear-gradient(to right, #99dbde, #2b79a6);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.calculator {
+  height: 560px;
+  width: 400px;
+  background-color: #091946;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  border-radius: 50px;
+}
+
+.calculator .screen__input {
+  width: 380px;
+  height: 80px;
+  border-radius: 50px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-bottom: 20px;
+}
+
+.calculator__button-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  position: relative;
+  margin-bottom: 7px;
+}
+
+.calculator__button-row .normal-button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.calculator__button-row .big-button {
+  width: 180px;
+  height: 80px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+/*# sourceMappingURL=calculator.css.map */
