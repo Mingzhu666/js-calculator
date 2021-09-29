@@ -11,12 +11,13 @@ body {
   height: 560px;
   width: 400px;
   background-color: rgb(9, 25, 70);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
   border-radius: 50px;
 
-  .screen__input {
+  .screen-input {
+    // text-align: right;
+    align-items: center;
+    font-size: xx-large;
+    font-weight: bolder;
     width: 380px;
     height: 80px;
     border-radius: 50px;
