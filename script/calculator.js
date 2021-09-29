@@ -28,35 +28,53 @@ clear.addEventListener('click', e => {
   console.log("operandTemp " + operandTemp);
 });
 
-const clickDecimal = (currentOperand, previousOperatorMethod) => {
-  if(currentOperand.includes('.')) {
-    return currentOperand;
-  }
-  else if (currentOperand === 0 || previousOperatorMethod != null) {
-    return '0.';
-  }
-  else {
-    return currentOperand + '.';
-  }
-}
+// const clickDecimal = (currentOperand, previousOperatorMethod) => {
+//   if(currentOperand.includes('.')) {
+//     return currentOperand;
+//   }
+//   else if (currentOperand === 0 || previousOperatorMethod != null) {
+//     return '0.';
+//   }
+//   else {
+//     return currentOperand + '.';
+//   }
+// }
 
 decimal.addEventListener('click', e => {
-  if(display.value.indexOf('.') === -1) {  // no decimal point in the display
-    if(display.value != '') {
-      display.value += decimal.innerText;
+  if(operatorMethod === null) {
+    if(display.value.indexOf('.') === -1) {  // no decimal point in the display
+      if(display.value != '') {
+        display.value += decimal.innerText;
+      }
+      else {
+        display.value = '0.';
+      }
     }
-    else {
+  }
+  else {
+    if(secondNumber === null && operandTemp === null) {
+      console.log('test1');
       display.value = '0.';
+      operandTemp = display.value;
+    }
+    else if(secondNumber === null && operandTemp != null) {
+      if(operandTemp.indexOf('.') === -1) {  // no decimal point in the operandTemp
+        display.value += decimal.innerText;
+      }
     }
   }
 });
 
 positiveNegative.addEventListener('click', e => {
-  display.value = display.value * (-1);
+  if(display.value != '') {
+    display.value = display.value * (-1);
+  }
 });
 
 percent.addEventListener('click', e => {
-  display.value = display.value / 100;
+  if(display.value != '') {
+    display.value = display.value / 100;
+  }
 });
 
 equal.addEventListener('click', e => {
@@ -93,8 +111,14 @@ numberButtons.forEach(
   (number) => {
     // console.log("number clicked");
     number.addEventListener('click', () => {
-      // inputString += number;
-      // operatorMethod
+      if(firstNumber === 'ERROR') {
+        firstNumber = null;
+        secondNumber = null;
+        operatorMethod = null;
+        currentOperatorMethod = null;
+        display.value = null;
+      }
+     
       if(currentOperatorMethod === null) {
         if(operatorMethod != null) {
           if(secondNumber === null && operandTemp === null) {
@@ -102,12 +126,16 @@ numberButtons.forEach(
             operandTemp = display.value;
           }
           else if(secondNumber === null && operandTemp != null) {
-            display.value += number.textContent;
-            operandTemp = display.value;
+            if(display.value != '0') {
+              display.value += number.textContent;
+              operandTemp = display.value;
+            }
           }
         }
         else {
-          display.value += number.textContent;
+          if(display.value != '0') {
+            display.value += number.textContent;
+          }
         }
       }
       else {
@@ -116,8 +144,10 @@ numberButtons.forEach(
           operandTemp = display.value;
         }
         else if(secondNumber === null && operandTemp != null) {
-          display.value += number.textContent;
-          operandTemp = display.value;
+          if(display.value != '0') {
+            display.value += number.textContent;
+            operandTemp = display.value;
+          }
         }
       }
       
@@ -134,7 +164,8 @@ numberButtons.forEach(
 operatorButtons.forEach(
   (operator) => {
     operator.addEventListener('click', () => {
-      operandTemp = null;
+      if(display.value != '') {
+        operandTemp = null;
         if(firstNumber === null || secondNumber === null) {
           if(operatorMethod != null) {
             secondNumber = display.value;
@@ -154,6 +185,7 @@ operatorButtons.forEach(
           operatorMethod = currentOperatorMethod;
           secondNumber = null;
         }
+      }
      
       console.log("operator clicked");
       console.log("firstNumber " + firstNumber);
@@ -177,6 +209,11 @@ const compute = (firstNumber, operator, secondNumber) => {
     return parseFloat(firstNumber) * parseFloat(secondNumber);
   }
   else if(operator === '÷') {
-    return parseFloat(firstNumber) / parseFloat(secondNumber);
+    if(parseFloat(secondNumber) == '0') {
+      return 'ERROR';
+    }
+    else {
+      return parseFloat(firstNumber) / parseFloat(secondNumber);
+    }
   }
 }
